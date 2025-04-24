@@ -50,4 +50,3 @@ To get a local copy up and running, follow these simple steps:
 ## Acknowledgements
 
 - Inspired by various portfolio designs and templates.
-- Thanks to all contributors and resources that helped in the development of this project.
