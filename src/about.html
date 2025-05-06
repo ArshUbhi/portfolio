@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <title>About Me</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f4f8;
+        color: #333;
+        line-height: 1.6;
+      }
+      .container {
+        width: 100%;
+        max-width: 90%;
+        margin: auto;
+        margin-top: 2%;
+        padding: 0.5rem;
+      }
+      h1,
+      h2 {
+        font-weight: 600;
+        color: #3f3d56;
+        margin-bottom: 1.2rem;
+      }
+      blockquote {
+        font-style: italic;
+        text-align: center;
+        margin-left: 20px;
+        border-left: 3px solid #007bff;
+        padding-left: 10px;
+      }
+      .intro {
+        margin-bottom: 4rem;
+        text-align: left;
+        font-size: 1.1rem;
+        color: #555;
+        line-height: 1.7;
+        max-width: 100%;
+        margin: 0 auto;
+        margin-top: 0%;
+      }
+      .intro p {
+        font-family: "Roboto", sans-serif; /* Use a clean, modern sans-serif font */
+        font-size: 0.95rem; /* Reduce the font size slightly */
+        font-weight: 200; /* Use a very thin font weight */
+        color: #333; /* Keep the text color readable */
+        line-height: 1.8; /* Adjust line height for better spacing */
+        margin-bottom: 1rem;
+      }
+      p {
+        margin-bottom: 20px;
+      }
+
+      /* Timeline Section */
+      .timeline {
+        position: relative;
+        padding-left: 2rem;
+        margin-bottom: 4rem;
+        border-left: 3px solid #ccc;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+        padding-right: 2rem;
+      }
+
+      /* Milestone Styling */
+      .milestone {
+        margin-bottom: 2rem;
+        position: relative;
+        font-size: 1rem;
+        transition: transform 0.4s ease, opacity 0.4s ease, font-size 0.4s ease,
+          box-shadow 0.4s ease;
+        transform: translateX(0);
+        opacity: 1;
+        cursor: pointer;
+      }
+      .milestone:hover {
+        font-size: 1.15rem;
+        box-shadow: 0 0 12px rgba(0, 128, 255, 0.6);
+        z-index: 1;
+      }
+      /* Ripple logic: target siblings based on proximity to hovered item */
+      .timeline:hover .milestone {
+        animation: none;
+      }
+      .timeline-section {
+        text-align: center;
+        margin-top: 2rem; /* Adjust the top margin */
+        padding-top: 1rem;
+      }
+
+      .thread-container {
+        position: relative;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .wave-thread {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .wave-thread path {
+        stroke: #ccc; /* Light grey color */
+        stroke-width: 2; /* Thin line */
+        opacity: 0.8; /* Slight transparency for a softer look */
+      }
+      .years {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        z-index: 1;
+        width: 100%; /* Ensure the years span the full width */
+        max-width: 1200px; /* Optional: Increase the maximum width */
+        margin: 0 auto;
+      }
+      /* Connector Line */
+      .connector {
+        position: absolute;
+        top: 100%; /* Position the connector below the year */
+        left: 50%;
+        width: 2px;
+        height: 0; /* Start with no height */
+        background-color: #888; /* Default connector color */
+        transform: translateX(-50%);
+        z-index: -1;
+        transition: height 0.3s ease, background-color 0.3s ease; /* Smooth transition for height and color */
+        pointer-events: none;
+      }
+
+      /* Extend the connector on hover */
+      .year:hover .connector {
+        height: 50px; /* Extend the connector upward */
+        background-color: #61dafb; /* Change the color to match the hover effect */
+      }
+      .year {
+        position: relative;
+        padding: 1rem;
+        cursor: pointer;
+        font-size: 1.4rem;
+        transition: transform 0.3s ease, color 0.3s, text-shadow 0.3s,
+          opacity 0.3s;
+        z-index: 1; /* Ensure years are above the connectors */
+      }
+
+      .year.glow {
+        transform: translateY(-30px);
+        color: #61dafb;
+        text-shadow: 0 0 15px rgba(97, 218, 251, 0.8);
+      }
+
+      .year-description {
+        margin-top: 2rem;
+        font-size: 1.1rem;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 1rem;
+        color: #444; /* Default text color */
+        background: none; /* Default background */
+        border-radius: 10px; /* Optional: Add rounded corners */
+        text-align: center; /* Center-align the text */
+        padding: 1rem 2rem; /* Add padding for spacing */
+        transition: background 0.5s ease, color 0.5s ease; /* Smooth transition for hover effect */
+      }
+      .year:not(.glow) {
+        opacity: 0.6;
+      }
+
+      .timeline .milestone:hover ~ .milestone {
+        animation: waveAnimation 0.6s ease-in-out forwards;
+      }
+
+      .timeline .milestone:hover ~ .milestone:nth-child(2) {
+        animation-delay: 0.05s;
+      }
+      .timeline .milestone:hover ~ .milestone:nth-child(3) {
+        animation-delay: 0.1s;
+      }
+      .timeline .milestone:hover ~ .milestone:nth-child(4) {
+        animation-delay: 0.15s;
+      }
+      .timeline .milestone:hover ~ .milestone:nth-child(5) {
+        animation-delay: 0.2s;
+      }
+      .timeline .milestone:hover ~ .milestone:nth-child(6) {
+        animation-delay: 0.25s;
+      }
+
+      /* Also animate previous milestones */
+      .timeline .milestone:hover {
+        animation: waveAnimation 0.6s ease-in-out forwards;
+      }
+
+      .timeline .milestone:hover ~ .milestone,
+      .timeline .milestone {
+        transform-origin: left;
+      }
+      .timeline-container {
+        width: 100%; /* Set the width of the container */
+        max-width: 1200px; /* Optional: Limit the maximum width */
+        height: auto; /* Set the height of the container */
+        margin-bottom: auto;
+        margin: 0 auto; /* Center the container horizontally */
+        overflow: hidden; /* Remove both vertical and horizontal scroll bars */
+        position: relative;
+        border: none; /* Remove the border */
+        border-radius: 10px; /* Optional: Add rounded corners */
+        padding: 1rem; /* Add padding inside the container */
+        background: transparent;
+        transition: background 0.5s ease; /* Smooth transition for hover effect */
+      }
+
+      @keyframes waveAnimation {
+        0% {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        50% {
+          transform: translateX(16px);
+          opacity: 0.85;
+        }
+        100% {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .hero-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 3rem;
+        padding-bottom: 0%;
+        background-color: #f0f4f8;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .logo-container img {
+        height: 50px;
+        object-fit: contain;
+      }
+      .hero-nav .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 2rem;
+        margin: 0;
+        padding: 0;
+      }
+      .hero-nav .nav-link {
+        text-decoration: none;
+        color: #333;
+        font-weight: 600;
+        transition: color 0.3s ease;
+        padding-bottom: 4px;
+        border-bottom: 2px solid transparent;
+      }
+      .hero-nav .nav-link:hover {
+        color: #6c63ff;
+        border-bottom: 2px solid #6c63ff;
+      }
+      .cta-button {
+        background-color: #6c63ff;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: bold;
+        text-align: center;
+        transition: background-color 0.3s ease;
+      }
+      .cta-button:hover {
+        background-color: #444;
+      }
+      .page-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #000000;
+        text-align: center;
+        margin: 0;
+      }
+      .highlight {
+        font-size: 1.6rem; /* Larger font size for the first few words */
+        font-weight: bold; /* Make it bold */
+        color: #6c63ff; /* Optional: Add a different color */
+      }
+      .google-form-container {
+        margin-top: 2rem;
+        padding: 1rem;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .google-form-container h2 {
+        font-size: 1.8rem;
+        color: #3f3d56;
+        margin-bottom: 1rem;
+      }
+
+      .google-form-container p {
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hero Section -->
+    <header class="hero-header">
+      <div class="logo-container">
+        <img
+          src="assets/images/logo_no_bg.png"
+          alt="Arshpreet Kaur Logo"
+          class="logo"
+        />
+      </div>
+      <div class="page-title">My Values. My Vision</div>
+      <nav class="hero-nav">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="container">
+      <!-- Intro Section -->
+      <section class="intro">
+        <div class="container">
+          <p>
+            <span class="highlight">Hi, I’m Arshpreet Kaur </span>
+            — and if I had to sum myself up, I’d say I’m a builder at heart, a
+            visionary by nature, and a lifelong learner by choice.
+            <br />
+            I come from a background that taught me to respect both structure
+            and imagination. Growing up, I was the curious child who would sit
+            beside my father while he worked, pretending to do the same—turning
+            playtime into problem-solving. That instinct to understand how
+            things work and how they could work better has shaped my entire
+            journey.<br />
+
+            I studied Computer Science because I’ve always seen technology as a
+            powerful way to bring ideas to life—not just for innovation’s sake,
+            but to make real improvements in the way people live, work, and
+            connect. Over the years, I’ve honed my skills in data engineering,
+            cloud technologies, automation, and visualization—but underneath
+            every tool or platform, what drives me is clarity, impact, and
+            purpose.<br />
+
+            When it comes to my work ethic, I value responsibility, honesty, and
+            precision. I take initiative, ask the right questions, and follow
+            through—whether that means learning a new framework overnight or
+            taking time to ensure the end user’s experience is seamless. I also
+            care deeply about documentation and knowledge sharing. To me, a
+            great piece of work isn't just what runs perfectly—it's what others
+            can pick up, understand, and build on.<br />
+
+            I believe in designing systems that last, communicating with
+            transparency, and balancing vision with humility. I’ve led meetings,
+            solved tough bugs, created bots, built pipelines, and learned from
+            failure—all while staying anchored in my values: curiosity, empathy,
+            and craftsmanship.
+          </p>
+
+          <blockquote>
+            <p>
+              <strong>My motto is:</strong> "Create with purpose. Build with
+              impact."
+            </p>
+          </blockquote>
+
+          <p>
+            What makes me different? I think it’s the way I bring both heart and
+            logic to everything I do. I don’t cut corners, and I never settle
+            for “just okay.” I love working with people who challenge ideas, not
+            individuals—who care as much about the why as the how. I'm deeply
+            self-motivated, but I also find a lot of joy in
+            collaboration—especially when it means creating something that
+            didn't exist before.<br />
+
+            In the end, I’m not chasing a title or a checklist. I’m building a
+            career where I can keep learning, keep contributing, and keep making
+            a difference—one thoughtful project at a time.
+          </p>
+        </div>
+      </section>
+
+      <!-- Timeline Section -->
+      <div class="timeline-container">
+        <section class="timeline-section">
+          <h2>Growth Timeline</h2>
+          <div class="thread-container">
+            <svg
+              class="wave-thread"
+              viewBox="0 0 1000 100"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0,50 Q125,50 250,50 T500,50 T750,50 T1000,50"
+                fill="transparent"
+                stroke="#ccc"
+                stroke-width="2"
+              />
+            </svg>
+            <div class="years">
+              <div
+                class="year"
+                data-description="This was the year I said 'Hello, world!'—literally. My first line of code in Java was more than just a simple System.out.println(&quot;Hello, world&quot;);. It was my introduction to the world of programming and data science. Stepping into Thompson Rivers University, I was filled with curiosity and excitement, eager to explore the endless possibilities of technology. That moment marked the beginning of my journey—a path where logic and creativity converge, and data has the power to tell meaningful stories."
+                data-index="0"
+              >
+                <span class="connector"></span>
+                2019
+              </div>
+              <div
+                class="year"
+                data-description="As the world turned upside down, I found clarity by building things right-side up. I joined clubs, teamed up on projects, and started experimenting with real-world problems through code. Whether it was designing mock apps or playing with data, this was the year I got comfortable being uncomfortable—learning, failing, and growing with every attempt."
+                data-index="1"
+              >
+                <span class="connector"></span>
+                2020
+              </div>
+              <div
+                class="year"
+                data-description="I discovered what really lit me up: backend systems, clean logic, and smart design. Data stopped being just numbers—it became a language I was learning to speak fluently. I dug deeper into databases, APIs, and cloud architecture. I began aligning my skills with impact, realizing that great tech isn’t just functional—it’s thoughtful."
+                data-index="2"
+              >
+                <span class="connector"></span>
+                2021
+              </div>
+              <div
+                class="year"
+                data-description="I shifted gears toward career readiness. I polished my skills, deepened my understanding of tools like Azure and Spark, and developed an eye for end-to-end solutions. This was also the year I realized the importance of good documentation and teamwork—I started treating knowledge like a shared resource, not a personal stash."
+                data-index="3"
+              >
+                <span class="connector"></span>
+                2022
+              </div>
+              <div
+                class="year"
+                data-description="I landed a Business Technology Co-op at BCLC—and it was everything I hoped for. I worked on automation, data pipelines, bots, and user-centered tools. I led the Co-op Club, where I organized bi-weekly sessions for knowledge sharing, collaborative problem-solving, and community building. We discussed tech trends, held mini-hackathons, and helped each other grow. I built strong professional relationships, found incredible mentors, and contributed meaningfully to real-world solutions. This was the year my confidence took off."
+                data-index="4"
+              >
+                <span class="connector"></span>
+                2023
+              </div>
+              <div
+                class="year"
+                data-description="I wrapped up my final semester and graduated with a Bachelor of Computing Science—but even before walking the stage, I had the chance to give back. I was invited to speak at a career counselling event at TRU, where I shared my co-op journey and lessons learned with an audience of over 60 students. It was an incredible experience—my first time speaking as a guest, and a moment where I realized how far I’d come. This wasn’t just the end of a chapter; it was a powerful reminder of why I started."
+                data-index="5"
+              >
+                <span class="connector"></span>
+                2024
+              </div>
+              <div
+                class="year"
+                data-description="This is the year of new beginnings. I’m actively looking for a role where I can do meaningful work with people who care. I’m not just searching for a job—I’m seeking a team, a mission, and a place where I can keep growing. I carry forward the same energy I started with: curious, passionate, and ready to build."
+                data-index="6"
+              >
+                <span class="connector"></span>
+                2025
+              </div>
+            </div>
+          </div>
+          <div class="year-description"></div>
+        </section>
+      </div>
+    </div>
+    <div class="google-form-container">
+      <h2>Contact Me</h2>
+      <p>If you'd like to get in touch, please fill out the form below:</p>
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdGVONC0DSTedZrwOpVhw8qX8EZ7GzoJyopV8fHEmKYiW1Bsg/viewform?embedded=true" width="640" height="821" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    </div>
+
+    <script>
+      const years = document.querySelectorAll(".year");
+      const desc = document.querySelector(".year-description");
+
+      // Set the default message
+      const defaultMessage =
+        "Hover over a year to see what I accomplished in that year.";
+      desc.textContent = defaultMessage;
+
+      // Define gradients for each year
+      const gradients = [
+        "linear-gradient(180deg, #ffd1dc 0%, #ffd1dc 25%, transparent 100%)", // Gradient for 2019
+        "linear-gradient(180deg, #d0d3ff 0%, #d0d3ff 25%, transparent 100%)", // Gradient for 2020
+        "linear-gradient(180deg, #f9e1d7 0%, #f9e1d7 25%, transparent 100%)", // Gradient for 2021
+        "linear-gradient(180deg, #c9e2e4 0%, #c9e2e4 25%, transparent 100%)", // Gradient for 2022
+        "linear-gradient(180deg, #ffb3b3 0%, #ffb3b3 25%, transparent 100%)", // Gradient for 2023
+        "linear-gradient(180deg, #cce7f1 0%, #cce7f1 25%, transparent 100%)", // Gradient for 2024
+        "linear-gradient(180deg, #fad0c4 0%, #fad0c4 25%, transparent 100%)", // Gradient for 2025
+      ];
+
+      // Add event listeners to each year
+      years.forEach((year, idx) => {
+        year.addEventListener("mouseenter", () => {
+          // Remove glow from all years and reset their transform
+          years.forEach((y) => {
+            y.classList.remove("glow");
+            y.style.transform = "translateY(0)";
+          });
+
+          // Add glow to the hovered year
+          year.classList.add("glow");
+          year.style.transform = "translateY(-30px)"; // Raise the hovered year
+
+          // Update the description text and apply the gradient
+          desc.textContent = year.dataset.description;
+          desc.style.background = gradients[idx]; // Apply the gradient based on the index
+          desc.style.color = "#fff"; // Ensure text is visible
+          desc.style.borderRadius = "10px"; // Optional: Add rounded corners
+          desc.style.padding = "1rem 2rem"; // Add padding for spacing
+          desc.style.transition = "background 0.5s ease, color 0.5s ease"; // Smooth transition
+        });
+
+        year.addEventListener("mouseleave", () => {
+          // Reset the hovered year
+          year.classList.remove("glow");
+          year.style.transform = "translateY(0)";
+
+          // Reset the description text and styles
+          desc.textContent = defaultMessage;
+          desc.style.background = "none"; // Remove the gradient background
+          desc.style.color = "#444"; // Reset to default text color
+          desc.style.padding = "1rem"; // Reset padding
+        });
+      });
+    </script>
+  </body>
+</html>

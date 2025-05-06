@@ -1,28 +1,32 @@
-// This file contains JavaScript code for the portfolio website.
-// Add your interactive functionality here.
-
 document.addEventListener('DOMContentLoaded', () => {
-    // Example: Smooth scroll for navigation links
-    const links = document.querySelectorAll('a[href^="#"]');
-    links.forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            targetElement.scrollIntoView({ behavior: 'smooth' });
-        });
-    });
+    const video = document.getElementById('hero-video'); // Ensure the video has this ID
+    if (video) {
+        let isReversing = false;
 
-    // Example: Form validation for contact form
-    const form = document.querySelector('#contact-form');
-    if (form) {
-        form.addEventListener('submit', function(event) {
-            const name = form.querySelector('input[name="name"]').value;
-            const email = form.querySelector('input[name="email"]').value;
-            if (!name || !email) {
-                event.preventDefault();
-                alert('Please fill in all fields.');
+        // Function to toggle playback direction
+        function togglePlaybackDirection() {
+            if (!isReversing) {
+                video.playbackRate = 1; // Play forward
+                video.play();
+            } else {
+                video.playbackRate = -1; // Play backward
+                video.play();
+            }
+        }
+
+        // Listen for time updates to reverse direction
+        video.addEventListener('timeupdate', () => {
+            if (!isReversing && video.currentTime >= video.duration - 0.1) {
+                isReversing = true; // Switch to reverse
+                togglePlaybackDirection();
+            } else if (isReversing && video.currentTime <= 0.1) {
+                isReversing = false; // Switch to forward
+                togglePlaybackDirection();
             }
         });
+
+        // Start the video in forward mode
+        video.playbackRate = 1;
+        video.play();
     }
 });

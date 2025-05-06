@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vertical Scroll Ring</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0d1117;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      overflow-y: scroll;
+      height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 50vh;
+      padding-bottom: 50vh;
+    }
+
+    .project {
+    font-size: 1.5rem;
+    margin: 2rem 0;
+    padding: 1rem; /* Added padding */
+    transition: all 0.3s ease;
+    opacity: 0.3;
+    transform: scale(0.9);
+  }
+
+  .project.focused {
+    font-size: 2.2rem;
+    font-weight: bold;
+    opacity: 1;
+    transform: scale(1.2);
+    color: #f7a500;
+  }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="projectList">
+    <div class="project">Paris Olympics 2024 Data Engineering</div>
+    <div class="project">Payment System Application</div>
+    <div class="project">British Airways Data Analysis</div>
+    <div class="project">Runway Inspection & GeoAnalysis</div>
+    <div class="project">Forged Signature Detection System</div>
+    <div class="project">Pointer Pursuit</div>
+    <div class="project">SereneSignal Reminder App</div>
+    <div class="project">Dynamic Wallpaper Project</div>
+  </div>
+  
+
+  <script>
+    const projects = document.querySelectorAll(".project");
+    const projectImages = [
+      "src/assets/images/DE.png", // Paris Olympics 2024 Data Engineering
+      "src/assets/images/project2.png", // Payment System Application
+      "src/assets/images/project3.png", // British Airways Data Analysis
+      "src/assets/images/project4.png", // Runway Inspection & GeoAnalysis
+      "src/assets/images/project5.png", // Forged Signature Detection System
+      "src/assets/images/project6.png", // Pointer Pursuit
+      "src/assets/images/project7.png", // SereneSignal Reminder App
+      "src/assets/images/project8.png"  // Dynamic Wallpaper Project
+    ];
+  
+    function updateFocus() {
+      let center = window.innerHeight / 2;
+      projects.forEach((project, index) => {
+        const rect = project.getBoundingClientRect();
+        const distance = Math.abs(center - (rect.top + rect.height / 2));
+        if (distance < 50) {
+          project.classList.add("focused");
+          document.body.style.backgroundImage = `linear-gradient(rgba(13, 17, 23, 0.5), rgba(13, 17, 23, 0.5)), url(${projectImages[index]})`;
+          document.body.style.backgroundSize = "cover";
+          document.body.style.backgroundPosition = "center";
+          document.body.style.backgroundRepeat = "no-repeat";
+          document.body.style.backgroundAttachment = "fixed"; /* Ensures the background is fixed */
+        } else {
+          project.classList.remove("focused");
+        }
+      });
+    }
+  
+    window.addEventListener("scroll", updateFocus);
+    window.addEventListener("load", updateFocus);
+  </script>
+</body>
+</html>

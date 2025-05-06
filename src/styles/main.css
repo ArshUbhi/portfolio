@@ -138,7 +138,7 @@ nav {
 
 .hero-buttons .button {
   background-color: #fff;
-  color: #007BFF;
+  color: #ffffff;
   padding: 10px 20px;
   border-radius: 5px;
   text-decoration: none;
@@ -148,7 +148,6 @@ nav {
 }
 
 .hero-buttons .button:hover {
-  background-color: #007BFF;
   color: #fff;
 }
 
@@ -277,24 +276,216 @@ nav {
 }
 
 /* About Section */
-#about {
-  padding: 60px 0;
+
+.about-container {
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+padding: 50px;
+gap: 40px;
+max-width: 75%;
+margin: auto;
+flex-wrap: wrap;
+}
+.about-text {
+flex: 1;
+min-width: 600px;
+}
+.about-text h2 {
+font-size: 28px;
+margin-bottom: 20px;
+}
+.about-text p {
+font-size: 18px;
+line-height: 1.8;
+}
+/* Read More Button */
+.read-more-button {
+  display: inline-block;
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #28a745; /* Button text color changed to a green shade from the image */
+  text-decoration: none;
+  background-color: transparent; /* Transparent background */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  cursor: pointer;
+}
+.read-more-button:hover {
+  color: #f7a500; /* Same yellow as image hover */
+  text-decoration: none; /* Ensure no underline on hover */
+}
+.profile-pic {
+flex: 0 0 300px;
+border-radius: 50%;
+overflow: hidden;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s ease;
+}
+.profile-pic img {
+width: 100%;
+height: auto;
+display: block;
+}
+.profile-pic:hover {
+transform: scale(1.05);
+}
+@media (max-width: 768px) {
+.about-container {
+  flex-direction: column-reverse;
   text-align: center;
 }
-
-#about h2 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  color: #007BFF;
+}
+/* Profile Pic Wrapper */
+.profile-pic-wrapper {
+position: relative;
+display: inline-block;
+width: 300px; /* Adjust size as needed */
+height: 300px;
+border-radius: 50%;
+overflow: hidden;
+cursor: pointer;
 }
 
-#about p {
-  font-size: 1.2rem;
-  color: #666666;
-  max-width: 800px;
-  margin: 0 auto;
+.profile-pic-wrapper .profile-pic {
+width: 100%;
+height: 100%;
+border-radius: 50%;
+position: relative;
+z-index: 1;
 }
 
+.profile-pic-wrapper .profile-pic img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+border-radius: 50%;
+display: block;
+}
+
+/* Animated Ring */
+.profile-pic-wrapper::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+border-radius: 50%;
+border: 4px solid transparent;
+box-sizing: border-box;
+z-index: 0;
+animation: spin 3s linear infinite;
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+
+.profile-pic-wrapper:hover::before {
+opacity: 1;
+}
+
+/* Hover Text */
+.hover-text {
+position: absolute;
+bottom: -30px;
+left: 50%;
+transform: translateX(-50%);
+font-size: 14px;
+color: #333;
+background: #fff;
+padding: 5px 10px;
+border-radius: 20px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+opacity: 0;
+transition: all 0.3s ease;
+z-index: 2;
+}
+
+.profile-pic-wrapper:hover .hover-text {
+bottom: -50px;
+opacity: 1;
+}
+
+/* Animation for the Ring */
+@keyframes spin {
+0% {
+  transform: rotate(0deg);
+}
+100% {
+  transform: rotate(360deg);
+}
+}
+/* Profile Pic Wrapper */
+.profile-pic-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  cursor: pointer;
+  overflow: visible; /* Ensure the spinning text is visible */
+}
+
+/* Profile Picture */
+.profile-pic-wrapper .profile-pic {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.profile-pic-wrapper .profile-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+/* Spinning Text Ring */
+.text-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2; /* Ensure it is above the profile picture */
+  animation: spinText 15s linear infinite; /* Spins the text */
+}
+
+.text-ring svg {
+  width: 120%; /* Slightly larger than the profile picture */
+  height: 120%;
+  position: absolute;
+  top: -10%;
+  left: -10%;
+}
+.text-ring text {
+  fill: lightgrey; /* Default light grey color for the text */
+  font-size: 6px; /* Adjust font size to fit the circle */
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: fill 0.3s ease; /* Smooth transition for color change */
+}
+
+/* Change text color on hover */
+.profile-pic-wrapper:hover .text-ring text {
+  fill: #f7a500; /* Colored text when hovered */
+}
+
+/* Animation for Spinning Text */
+@keyframes spinText {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 /* Footer */
 footer {
   background-color: #fcfcfc;
