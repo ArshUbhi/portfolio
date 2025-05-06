@@ -4,141 +4,259 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Analysis Project: British Airways Review</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Send the video to the background */
+            object-fit: cover; /* Ensure the video covers the entire screen */
+            
+        }
+        /* Semi-Transparent Overlay */
+.video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5); /* White overlay with 50% transparency */
+    z-index: -1; /* Place the overlay above the video but below the content */
+}
+
+        /* Content Wrapper */
+        .content-wrapper {
+            position: relative;
+            max-width: 1400px;
+            margin: 1rem auto;
+            background: white; /* White sheet for content */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            overflow: auto; /* Allow scrolling within the content */
+            height: 90vh; /* Ensure the content fits within the viewport */
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        section {
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #457b9d;
+            margin-bottom: 1rem;
+        }
+
+        p, ul {
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Data Analysis Project: British Airways Review</h1>
-        <p class="project-subtitle">A Comprehensive Review of British Airways' Customer Satisfaction and Performance</p>
-    </header>
+    <!-- Video Background -->
+    <video class="video-background" autoplay muted loop>
+        <source src="assets/images/back_color.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+    </video>
+    <!-- Semi-Transparent Overlay -->
+    <div class="video-overlay"></div>
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
+        <header>
+            <h1>Data Analysis Project: British Airways Review</h1>
+            <p class="project-subtitle">A Comprehensive Review of British Airways' Customer Satisfaction and Performance</p>
+        </header>
 
-    <main>
+        <main>
+            <section class="visualization">
+                <h2>Data Visualization</h2>
+                <p>The dashboard below presents the results of the analysis, including key performance indicators, sentiment trends, and customer satisfaction insights. The interactive dashboard allows users to explore the data and uncover patterns on their own.</p>
+                
+                <div class='tableauPlaceholder' id='viz1746300924691' style='position: relative'>
+                    <noscript>
+                        <a href='#'>
+                            <img alt='Dashboard 1' src='https://public.tableau.com/static/images/Da/DataAnalysisProject-BritishAirways/Dashboard1/1_rss.png' style='border: none' />
+                        </a>
+                    </noscript>
+                    <object class='tableauViz' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                        <param name='embed_code_version' value='3' />
+                        <param name='site_root' value='' />
+                        <param name='name' value='DataAnalysisProject-BritishAirways/Dashboard1' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image' value='https://public.tableau.com/static/images/Da/DataAnalysisProject-BritishAirways/Dashboard1/1.png' />
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='language' value='en-US' />
+                    </object>
+                </div>
+                <script type='text/javascript'>
+                    var divElement = document.getElementById('viz1746300924691');
+                    var vizElement = divElement.getElementsByTagName('object')[0];
+                    if (divElement.offsetWidth > 800) {
+                        vizElement.style.width = '1200px';
+                        vizElement.style.height = '727px';
+                    } else if (divElement.offsetWidth > 500) {
+                        vizElement.style.width = '1200px';
+                        vizElement.style.height = '727px';
+                    } else {
+                        vizElement.style.width = '100%';
+                        vizElement.style.height = '1427px';
+                    }
+                    var scriptElement = document.createElement('script');
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+                </script>
+            </section>
 
-        <section class="visualization">
-            <h2>Data Visualization</h2>
-            <p>The dashboard below presents the results of the analysis, including key performance indicators, sentiment trends, and customer satisfaction insights. The interactive dashboard allows users to explore the data and uncover patterns on their own.</p>
-            
-            <div class='tableauPlaceholder' id='viz1746300924691' style='position: relative'>
-              <noscript>
-                  <a href='#'>
-                      <img alt='Dashboard 1' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Da&#47;DataAnalysisProject-BritishAirways&#47;Dashboard1&#47;1_rss.png' style='border: none' />
-                  </a>
-              </noscript>
-              <object class='tableauViz' style='display:none;'>
-                  <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-                  <param name='embed_code_version' value='3' />
-                  <param name='site_root' value='' />
-                  <param name='name' value='DataAnalysisProject-BritishAirways&#47;Dashboard1' />
-                  <param name='tabs' value='no' />
-                  <param name='toolbar' value='yes' />
-                  <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Da&#47;DataAnalysisProject-BritishAirways&#47;Dashboard1&#47;1.png' />
-                  <param name='animate_transition' value='yes' />
-                  <param name='display_static_image' value='yes' />
-                  <param name='display_spinner' value='yes' />
-                  <param name='display_overlay' value='yes' />
-                  <param name='display_count' value='yes' />
-                  <param name='language' value='en-US' />
-              </object>
-          </div>
-          <script type='text/javascript'>
-              var divElement = document.getElementById('viz1746300924691');
-              var vizElement = divElement.getElementsByTagName('object')[0];
-              if (divElement.offsetWidth > 800) {
-                  vizElement.style.width = '1200px';
-                  vizElement.style.height = '727px';
-              } else if (divElement.offsetWidth > 500) {
-                  vizElement.style.width = '1200px';
-                  vizElement.style.height = '727px';
-              } else {
-                  vizElement.style.width = '100%';
-                  vizElement.style.height = '1427px';
-              }
-              var scriptElement = document.createElement('script');
-              scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-              vizElement.parentNode.insertBefore(scriptElement, vizElement);
-          </script>
-        </section>
+            <section class="objective">
+                <h2>Objective</h2>
+                <p>The main objective of this project was to build a data-driven dashboard that allows stakeholders to:</p>
+                <ul>
+                    <li>Monitor trends in customer satisfaction over time.</li>
+                    <li>Identify specific areas for improvement and opportunities to excel.</li>
+                    <li>Drive actionable insights that lead to enhanced customer experience.</li>
+                </ul>
+            </section>
 
-        <section class="objective">
-            <h2>Objective</h2>
-            <p>The main objective of this project was to build a data-driven dashboard that allows stakeholders to:</p>
-            <ul>
-                <li>Monitor trends in customer satisfaction over time.</li>
-                <li>Identify specific areas for improvement and opportunities to excel.</li>
-                <li>Drive actionable insights that lead to enhanced customer experience.</li>
-            </ul>
-        </section>
-        <section class="overview">
-            <h2>Overview</h2>
-            <p>This interactive Tableau dashboard analyzes over 50,000 customer reviews of British Airways, collected between 2016 and 2023 from Kaggle. By leveraging sentiment data and various performance metrics, the dashboard provides actionable insights into how customers perceive different aspects of their travel experience. The goal is to enable stakeholders to make data-driven decisions to improve customer satisfaction.</p>
-        </section>
-        
-        <section class="problem-statement">
-            <h2>Problem Statement</h2>
-            <p>Customer satisfaction is a critical factor in the airline industry. With thousands of reviews submitted annually, manually analyzing this data for actionable insights is both time-consuming and inefficient. This project automates the analysis of customer feedback, enabling stakeholders to quickly identify key trends and areas for improvement, ultimately enhancing service quality and customer experience.</p>
-        </section>
-        <section class="data-overview">
-            <h2>Data Overview</h2>
-            <p>The data, sourced from Kaggle, includes 50,000+ customer reviews detailing several aspects of the British Airways service:</p>
-            <ul>
-            <li><strong>Overall satisfaction rating</strong></li>
-            <li><strong>Cabin service</strong></li>
-            <li><strong>In-flight entertainment</strong></li>
-            <li><strong>Food and beverage quality</strong></li>
-            <li><strong>Seat comfort</strong></li>
-            <li><strong>Value for money</strong></li>
-            </ul>
-            <p>The data covers a wide range of customer demographics, including frequent flyers, first-time passengers, and business travelers. By segmenting the data based on these demographics, it’s possible to gain insights into the unique experiences of different customer groups.</p>
-        </section>
-        <section class="tools-technologies">
-            <h2>Tools & Technologies Used</h2>
-            <ul>
-            <li><strong>Tableau:</strong> Used for building the interactive visualizations and dashboard.</li>
-            <li><strong>SQL:</strong> For data extraction and cleaning.</li>
-            <li><strong>Python:</strong> For data preprocessing and exploratory data analysis (EDA).</li>
-            </ul>
-        </section>
+            <section class="overview">
+                <h2>Overview</h2>
+                <p>This interactive Tableau dashboard analyzes over 50,000 customer reviews of British Airways, collected between 2016 and 2023 from Kaggle. By leveraging sentiment data and various performance metrics, the dashboard provides actionable insights into how customers perceive different aspects of their travel experience. The goal is to enable stakeholders to make data-driven decisions to improve customer satisfaction.</p>
+            </section>
 
-        <section class="key-features">
-            <h2>Key Features of the Dashboard</h2>
-            <ul>
-                <li><strong>Dynamic Metric Selection:</strong> Users can explore key metrics like overall satisfaction, food quality, or cabin service.</li>
-                <li><strong>Interactive Filters:</strong> Filters allow users to narrow down the data by traveler type, flight class, or specific time periods.</li>
-                <li><strong>Geographical Insights:</strong> A map visualization helps users view sentiment trends by region, highlighting variations in customer satisfaction across different countries.</li>
-                <li><strong>Trend Analysis:</strong> Time series visualizations show how customer ratings evolved year-over-year, highlighting any major shifts in customer sentiment.</li>
-                <li><strong>Sentiment Analysis:</strong> The dashboard includes sentiment scoring (positive, neutral, and negative), giving users a breakdown of how reviews are distributed in terms of sentiment.</li>
-            </ul>
-        </section>
+            <section class="problem-statement">
+                <h2>Problem Statement</h2>
+                <p>Customer satisfaction is a critical factor in the airline industry. With thousands of reviews submitted annually, manually analyzing this data for actionable insights is both time-consuming and inefficient. This project automates the analysis of customer feedback, enabling stakeholders to quickly identify key trends and areas for improvement, ultimately enhancing service quality and customer experience.</p>
+            </section>
 
-        <section class="findings">
-            <h2>Key Findings</h2>
-            <p>From the analysis, we observed several important trends:</p>
-            <ul>
-                <li><strong>Overall Satisfaction:</strong> The overall satisfaction rating has declined by 15% since the peak in 2019, with a noticeable dip during the pandemic years (2020-2021).</li>
-                <li><strong>Cabin Service Excellence:</strong> Cabin service consistently scores high, with an average rating of 4.5 out of 5 across all years, reflecting British Airways' strong customer service culture.</li>
-                <li><strong>In-Flight Entertainment:</strong> The average rating for in-flight entertainment has been 2.8 out of 5, highlighting an area of improvement for the airline.</li>
-                <li><strong>Food Quality:</strong> Food quality consistently ranks low, with an average score of 3.0 out of 5.</li>
-                <li><strong>Regional Differences:</strong> Customers in North America give British Airways a higher satisfaction rating (average 4.2/5) compared to passengers in Asia (average 3.6/5).</li>
-                <li><strong>Sentiment Distribution:</strong> The sentiment breakdown shows 65% positive reviews, 20% neutral, and 15% negative, with negative reviews spiking in certain periods like delays and service interruptions.</li>
-        </section>
+            <section class="data-overview">
+                <h2>Data Overview</h2>
+                <p>The data, sourced from Kaggle, includes 50,000+ customer reviews detailing several aspects of the British Airways service:</p>
+                <ul>
+                    <li><strong>Overall satisfaction rating</strong></li>
+                    <li><strong>Cabin service</strong></li>
+                    <li><strong>In-flight entertainment</strong></li>
+                    <li><strong>Food and beverage quality</strong></li>
+                    <li><strong>Seat comfort</strong></li>
+                    <li><strong>Value for money</strong></li>
+                </ul>
+                <p>The data covers a wide range of customer demographics, including frequent flyers, first-time passengers, and business travelers. By segmenting the data based on these demographics, it’s possible to gain insights into the unique experiences of different customer groups.</p>
+            </section>
 
-        <section class="challenges-solutions">
-            <h2>Challenges & Solutions</h2>
-            <ul>
-                <li><strong>Data Inconsistencies:</strong> Some reviews were incomplete or contained errors. These issues were resolved using data wrangling techniques in Python, such as filling missing values and handling outliers.</li>
-                <li><strong>Sentiment Analysis:</strong> Determining sentiment from textual data posed challenges due to the variety of expressions used in reviews. I used natural language processing (NLP) techniques to classify the sentiment of reviews accurately.</li>
-            </ul>
-        </section>
+            <section class="tools-technologies">
+                <h2>Tools & Technologies Used</h2>
+                <ul>
+                    <li><strong>Tableau:</strong> Used for building the interactive visualizations and dashboard.</li>
+                    <li><strong>SQL:</strong> For data extraction and cleaning.</li>
+                    <li><strong>Python:</strong> For data preprocessing and exploratory data analysis (EDA).</li>
+                </ul>
+            </section>
 
-        <section class="conclusion">
-            <h2>Conclusion</h2>
-            <p>The dashboard provides British Airways with a powerful tool to monitor customer satisfaction, uncover actionable insights, and make data-driven decisions to improve their services. Key areas for improvement identified through the dashboard include in-flight entertainment and food quality, which align with customer feedback. Future developments could include real-time data feeds and predictive analytics to foresee shifts in customer sentiment.</p>
-        </section>
-    </main>
+            <section class="key-features">
+                <h2>Key Features of the Dashboard</h2>
+                <ul>
+                    <li><strong>Dynamic Metric Selection:</strong> Users can explore key metrics like overall satisfaction, food quality, or cabin service.</li>
+                    <li><strong>Interactive Filters:</strong> Filters allow users to narrow down the data by traveler type, flight class, or specific time periods.</li>
+                    <li><strong>Geographical Insights:</strong> A map visualization helps users view sentiment trends by region, highlighting variations in customer satisfaction across different countries.</li>
+                    <li><strong>Trend Analysis:</strong> Time series visualizations show how customer ratings evolved year-over-year, highlighting any major shifts in customer sentiment.</li>
+                    <li><strong>Sentiment Analysis:</strong> The dashboard includes sentiment scoring (positive, neutral, and negative), giving users a breakdown of how reviews are distributed in terms of sentiment.</li>
+                </ul>
+            </section>
 
-    <footer>
-        <p>&copy; 2025 Arshpreet Kaur | Data Science & Engineering Projects</p>
-    </footer>
+            <section class="findings">
+                <h2>Key Findings</h2>
+                <p>From the analysis, we observed several important trends:</p>
+                <ul>
+                    <li><strong>Overall Satisfaction:</strong> The overall satisfaction rating has declined by 15% since the peak in 2019, with a noticeable dip during the pandemic years (2020-2021).</li>
+                    <li><strong>Cabin Service Excellence:</strong> Cabin service consistently scores high, with an average rating of 4.5 out of 5 across all years, reflecting British Airways' strong customer service culture.</li>
+                    <li><strong>In-Flight Entertainment:</strong> The average rating for in-flight entertainment has been 2.8 out of 5, highlighting an area of improvement for the airline.</li>
+                    <li><strong>Food Quality:</strong> Food quality consistently ranks low, with an average score of 3.0 out of 5.</li>
+                    <li><strong>Regional Differences:</strong> Customers in North America give British Airways a higher satisfaction rating (average 4.2/5) compared to passengers in Asia (average 3.6/5).</li>
+                    <li><strong>Sentiment Distribution:</strong> The sentiment breakdown shows 65% positive reviews, 20% neutral, and 15% negative, with negative reviews spiking in certain periods like delays and service interruptions.</li>
+                </ul>
+            </section>
 
+            <section class="challenges-solutions">
+                <h2>Challenges & Solutions</h2>
+                <ul>
+                    <li><strong>Data Inconsistencies:</strong> Some reviews were incomplete or contained errors. These issues were resolved using data wrangling techniques in Python, such as filling missing values and handling outliers.</li>
+                    <li><strong>Sentiment Analysis:</strong> Determining sentiment from textual data posed challenges due to the variety of expressions used in reviews. I used natural language processing (NLP) techniques to classify the sentiment of reviews accurately.</li>
+                </ul>
+            </section>
+
+            <section class="conclusion">
+                <h2>Conclusion</h2>
+                <p>The dashboard provides British Airways with a powerful tool to monitor customer satisfaction, uncover actionable insights, and make data-driven decisions to improve their services. Key areas for improvement identified through the dashboard include in-flight entertainment and food quality, which align with customer feedback. Future developments could include real-time data feeds and predictive analytics to foresee shifts in customer sentiment.</p>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Arshpreet Kaur | Data Science & Engineering Projects</p>
+        </footer>
+    </div>
 </body>
 </html>
