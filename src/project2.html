@@ -11,8 +11,9 @@
   <style>
     body {
       margin: 0;
+      padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #E6FBFC;
+      background-color: #f7fbfd;
       color: #333;
       line-height: 1.6;
     }
@@ -20,7 +21,7 @@
     .project-section {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 60px 20px;
+      padding: 40px 20px 20px;
     }
 
     h1 {
@@ -51,6 +52,17 @@
       font-size: 1rem;
       color: #444;
     }
+
+    .section ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+      color: #444;
+      line-height: 1.7;
+    }
+    .section li {
+      margin-bottom: 8px;
+    }
+
 
     .project-video {
       width: 100%;
@@ -114,7 +126,7 @@
 <body>
   <section class="project-section">
 
-    <h1 data-aos="fade-up">Stripe Payment System Proposal</h1>
+    <h1 data-aos="fade-up">Stripe Payment System</h1>
     <p class="subtitle" data-aos="fade-up">Secure. Modern. Seamlessly Executed.</p>
 
     <div class="section" data-aos="fade-up">
@@ -145,7 +157,7 @@
 
     <div class="section" data-aos="fade-up">
         <h2>System Architecture</h2>
-        <img src="assets/images/architecture_diagram.png" alt="System Architecture Diagram" style="width:100%; max-height:400px; object-fit:contain; border-radius:10px; box-shadow: 0 6px 16px rgba(0,0,0,0.08);">
+        <img src="assets\images\SysArchDiagram_paymentSystem.png" alt="System Architecture Diagram" style="width:100%; max-height:400px; object-fit:contain; border-radius:10px; box-shadow: 0 6px 16px rgba(0,0,0,0.08);">
         <p>
           This diagram outlines the flow of data and responsibilities across the system. When a user submits the payment form, the frontend securely captures card details using Stripe Elements. 
           The form data is sent to a Flask backend route (<code>/create-payment-intent</code>), which uses environment-secured API keys to communicate with Stripe's servers.
@@ -175,6 +187,17 @@
         </figure>
       </div>
     </div>
+
+    <div class="section" data-aos="fade-up">
+      <h2>Tech Stack</h2>
+      <ul>
+        <li><strong>Frontend:</strong> HTML, CSS, JavaScript, Stripe.js, Stripe Elements</li>
+        <li><strong>Backend:</strong> Python, Flask</li>
+        <li><strong>Deployment Ready:</strong> Render (in progress)</li>
+        <li><strong>Security:</strong> .env, HTTPS-ready, tokenized card handling</li>
+      </ul>
+    </div>
+    
 
     <div class="section" data-aos="fade-up">
       <h2>My Role</h2>
