@@ -12,7 +12,7 @@
       font-family: "Inter", sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f0f4f8;
+      background-color: #fafdff;
       color: #333;
       line-height: 1.6;
     }
@@ -42,40 +42,78 @@
     }
 
     .intro {
-      margin-bottom: 4rem;
-      font-size: 1.1rem;
-      color: #555;
-      line-height: 1.7;
-      max-width: 100%;
-      margin: 0 auto;
-      margin-top: 0%;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 2rem 2.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeInUp 1.2s ease forwards;
+    }
+
+    .intro:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    }
+
+    .intro h3 {
+      margin-top: 2rem;
+      color: #4a4a4a;
+      font-size: 1.2rem;
+      border-left: 4px solid #6c63ff;
+      padding-left: 0.75rem;
     }
 
     .intro p {
-      font-family: "Roboto", sans-serif;
-      font-size: 0.95rem;
-      font-weight: 200;
-      color: #333;
-      line-height: 1.8;
-      margin-bottom: 1rem;
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: #444;
+      margin-bottom: 1.5rem;
     }
 
     .intro .highlight {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       font-weight: bold;
       color: #6c63ff;
+      display: block;
+      margin-bottom: 1rem;
     }
 
-    .motto {
+    .motto-card {
       font-size: 1.4rem;
       font-style: italic;
       color: #6c63ff;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1s ease forwards;
-      animation-delay: 1s;
+      background: #f8f8ff;
+      border-left: 4px solid #6c63ff;
+      padding: 1rem 1.5rem;
+      margin: 2rem auto;
+      max-width: 600px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #6c63ff;
+      width: 0;
+      animation: typingLoop 6s steps(40, end) infinite;
       text-align: center;
     }
+
+    @keyframes typingLoop {
+      0% {
+        width: 0;
+      }
+
+      40% {
+        width: 100%;
+      }
+
+      60% {
+        width: 100%;
+      }
+
+      100% {
+        width: 0;
+      }
+    }
+
 
     @keyframes fadeInUp {
       to {
@@ -84,8 +122,22 @@
       }
     }
 
+    .page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #6c63ff;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  flex-grow: 1;
+  letter-spacing: 1px;
+  font-style: italic;
+}
+
+
     .contact-section {
-      background: linear-gradient(to right, #e0eafc, #cfdef3);
+      background:transparent;
       padding: 4rem 1rem;
       text-align: center;
     }
@@ -456,9 +508,8 @@
         <p>I bring both heart and logic to everything I do. I love working with people who challenge ideas—not
           individuals—and who care about the *why* as much as the *how*. I’m self-motivated, energized by collaboration,
           and passionate about creating things that didn’t exist before.</p>
-        <blockquote class="motto">
-          “Create with purpose. Build with impact.”
-        </blockquote>
+        <div class="motto-card">“Create with purpose. Build with impact.”</div>
+
         <p>In the end, I’m building a career rooted in growth, contribution, and purpose—one thoughtful project at a
           time.</p>
       </section>
@@ -526,7 +577,8 @@
       <div class="contact-card">
         <h2>Let’s Get in Touch</h2>
         <p>I’d love to hear from you—whether it’s about a project, an opportunity, or just to say hi!</p>
-        <a href="mailto:ubhi.ap@gmail.com?subject=Hello%20Arshpreet&body=I%20saw%20your%20portfolio%20and..." class="contact-button">📬 Email Me</a>
+        <a href="mailto:ubhi.ap@gmail.com?subject=Hello%20Arshpreet&body=I%20saw%20your%20portfolio%20and..."
+          class="contact-button">📬 Email Me</a>
         <a href="https://www.linkedin.com/in/arsh0011/" target="_blank" class="contact-button secondary"> Connect on
           LinkedIn</a>
       </div>
