@@ -1,556 +1,528 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Paris Olympics Data Engineering</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --primary: #004aad;
-        --secondary: #f4f4f4;
-        --accent: #e63946;
-        --highlight: #ffce00;
-      }
-      body {
-        font-family: "Inter", sans-serif;
-        margin: 0;
-        background: #fafafa;
-        color: #2d2d2d;
-        line-height: 1.5;
-        font-size: 1rem;
-        overflow-x: hidden;
-      }
-      header {
-        background: url("assets/images/69043.jpg") no-repeat center center /
-          cover;
-        height: 255px;
-        width: 100%;
-        background-color: #f3f3f3;
-      }
 
-      /* Now make the hero text its own section */
-      .hero-text {
-        text-align: center;
-        background-color: #fafafa;
-        padding: 1.5rem 1rem 1rem;
-        max-width: 50%;
-        margin: 0 auto;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paris Olympics Data Engineering</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #004aad;
+      --secondary: #f4f4f4;
+      --accent: #e63946;
+      --highlight: #ffce00;
+    }
 
-      .hero-text h1 {
-        font-family: "Playfair Display", serif;
-        font-size: 2.8rem;
-        font-weight: 700;
-        color: var(--primary);
-        margin-bottom: 0.3rem;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.06);
-      }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #fafafa;
+      color: #2d2d2d;
+      line-height: 1.5;
+      font-size: 1rem;
+      overflow-x: hidden;
+    }
 
-      .hero-text .subtitle {
-        font-size: 1.1rem;
-        color: #555;
-        font-style: italic;
-        line-height: 1.4;
-        margin: 0;
-      }
+    header {
+      background: url("assets/images/69043.jpg") no-repeat center center / cover;
+      height: 255px;
+      width: 100%;
+      background-color: #f3f3f3;
+    }
 
-      main {
-        max-width: 1080px;
-        margin: 0 auto;
-        padding: 2rem 1.5rem;
-      }
-      section {
-        margin-bottom: 2rem;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 2rem;
-        position: relative;
-        z-index: 0;
-        overflow: visible;
-      }
-      .text-block {
-        flex: 1 1 400px;
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.6s ease;
-      }
-      .image-block {
-        flex: 1 1 60%;
-        position: relative;
-        display: flex;
-        justify-content: flex-end;
-        z-index: 2; /* Bring image above text on hover */
-        overflow: visible;
-      }
+    /* Now make the hero text its own section */
+    .hero-text {
+      text-align: center;
+      background-color: #fafafa;
+      padding: 1.5rem 1rem 1rem;
+      max-width: 50%;
+      margin: 0 auto;
+    }
 
-      .image-block {
-        flex: 1 1 60%;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1;
-        overflow: visible;
-      }
+    .hero-text h1 {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.06);
+    }
 
-      .image-block img {
-        width: 100%;
-        max-width: 550px;
-        transform: scale(1);
-        transition: transform 0.4s ease, box-shadow 0.3s ease;
-        border: 2px solid rgb(255, 255, 255); /* clean inner border */
-        outline: 2px solid var(--primary); /* blue outer border using your palette */
-        outline-offset: 5px; /* space between image and blue border */
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-        border-radius: 0; /* rectangular corners */
-        position: relative;
-        z-index: 2;
-      }
-      .image-block:hover img {
-        transform: scale(1.25);
-        z-index: 10;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-      }
+    .hero-text .subtitle {
+      font-size: 1.1rem;
+      color: #555;
+      font-style: italic;
+      line-height: 1.4;
+      text-align: center;
+      margin: 0;
+    }
 
-      .in-view {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-      }
-      h2 {
-        font-family: "Playfair Display", serif;
-        font-size: 1.9rem;
-        margin-bottom: 0.5rem;
-        color: var(--primary);
-      }
-      ul {
-        padding-left: 1.2rem;
-      }
-      ul li {
-        margin-bottom: 0.5rem;
-      }
-      img {
-        width: 100%;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      }
-      .metrics {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-        margin: 1rem 0;
-        text-align: center;
-      }
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
 
-      .metric {
-        position: relative;
-        background: white;
-        padding: 1.5rem;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        border-top: 6px solid #e80e69;
-        transition: transform 0.3s ease;
-        cursor: pointer;
-        opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.6s ease;
-      }
+    section {
+      margin-bottom: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+      position: relative;
+      z-index: 0;
+      overflow: visible;
+    }
 
-      .metric.in-view {
-        opacity: 1;
+    .text-block {
+      flex: 1 1 400px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .image-block {
+      flex: 1 1 60%;
+      position: relative;
+      display: flex;
+      justify-content: flex-end;
+      z-index: 2;
+      /* Bring image above text on hover */
+      overflow: visible;
+    }
+
+    .image-block {
+      flex: 1 1 60%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+      overflow: visible;
+    }
+
+    .image-block img {
+      width: 100%;
+      max-width: 550px;
+      transform: scale(1);
+      transition: transform 0.4s ease, box-shadow 0.3s ease;
+      border: 2px solid rgb(255, 255, 255);
+      /* clean inner border */
+      outline: 2px solid var(--primary);
+      /* blue outer border using your palette */
+      outline-offset: 5px;
+      /* space between image and blue border */
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      border-radius: 0;
+      /* rectangular corners */
+      position: relative;
+      z-index: 2;
+    }
+
+    .image-block:hover img {
+      transform: scale(1.25);
+      z-index: 10;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .in-view {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    h2 {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 1.9rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
+    ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 1rem 0;
+      text-align: center;
+    }
+
+    .metric {
+      position: relative;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border-top: 6px solid #e80e69;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+
+    .metric.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .metric:hover {
+      transform: translateY(-6px);
+    }
+
+    .metric h3 {
+      font-size: 2rem;
+      margin: 0.5rem 0;
+      color: var(--primary);
+    }
+
+    .metric p {
+      margin: 0;
+      color: #555;
+    }
+
+    .metric-detail {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #444;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.4s ease;
+    }
+
+    .metric:hover .metric-detail {
+      max-height: 150px;
+      opacity: 1;
+    }
+
+    .metric:hover {
+      transform: scale(1.05);
+    }
+
+    .metric h3 {
+      font-size: 1.6rem;
+      margin: 0.5rem 0;
+      color: var(--primary);
+    }
+
+    .metric p {
+      margin: 0;
+      color: #555;
+    }
+
+    .scroll-down {
+      display: inline-block;
+      margin-top: 1.5rem;
+      font-size: 2rem;
+      text-decoration: none;
+      animation: bounce 1.5s infinite;
+      transition: transform 0.3s ease;
+    }
+
+    .scroll-down:hover {
+      transform: translateY(5px);
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
         transform: translateY(0);
       }
 
-      .metric:hover {
-        transform: translateY(-6px);
+      50% {
+        transform: translateY(10px);
       }
+    }
 
-      .metric h3 {
-        font-size: 2rem;
-        margin: 0.5rem 0;
-        color: var(--primary);
-      }
+    .scroll-icon {
+      width: 40px;
+      height: auto;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      display: block;
+      margin: 0 auto;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+      transition: transform 0.3s ease;
+    }
 
-      .metric p {
-        margin: 0;
-        color: #555;
-      }
+    img:not(.scroll-icon) {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
 
-      .metric-detail {
-        margin-top: 1rem;
-        font-size: 0.9rem;
-        color: #444;
-        max-height: 0;
-        opacity: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease, opacity 0.4s ease;
-      }
+    footer {
+      text-align: center;
+      padding: 3rem 1rem;
+      background-color: var(--secondary);
+      color: #777;
+      font-size: 0.9rem;
+    }
 
-      .metric:hover .metric-detail {
-        max-height: 150px;
-        opacity: 1;
-      }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
 
-      .metric:hover {
-        transform: scale(1.05);
-      }
-      .metric h3 {
-        font-size: 1.6rem;
-        margin: 0.5rem 0;
-        color: var(--primary);
-      }
-      .metric p {
-        margin: 0;
-        color: #555;
-      }
-      .scroll-down {
-        display: inline-block;
-        margin-top: 1.5rem;
-        font-size: 2rem;
-        text-decoration: none;
-        animation: bounce 1.5s infinite;
-        transition: transform 0.3s ease;
-      }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
 
-      .scroll-down:hover {
-        transform: translateY(5px);
-      }
+<body>
+  <header></header>
+  <section class="hero-text">
+    <h1>Paris Olympics Data Engineering</h1>
+    <p class="subtitle">
+      Transforming Olympic data into actionable insights through modern cloud
+      pipelines.
+    </p>
+  </section>
 
-      @keyframes bounce {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(10px);
-        }
-      }
-      .scroll-icon {
-        width: 40px;
-        height: auto;
-        border: none;
-        border-radius: 0;
-        box-shadow: none;
-        display: block;
-        margin: 0 auto;
-        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-        transition: transform 0.3s ease;
-      }
-      img:not(.scroll-icon) {
-        width: 100%;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      }
-
-      footer {
-        text-align: center;
-        padding: 3rem 1rem;
-        background-color: var(--secondary);
-        color: #777;
-        font-size: 0.9rem;
-      }
-      a {
-        color: var(--accent);
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-    </style>
-  </head>
-  <body>
-    <header></header>
-    <section class="hero-text">
-      <h1>Paris Olympics Data Engineering</h1>
-      <p class="subtitle">
-        Transforming Olympic data into actionable insights through modern cloud
-        pipelines.
+  <main>
+    <section id="metrics" class="metrics">
+      <div class="metric">
+        <h3 class="count" data-target="5">0</h3>
+        <p>Datasets Processed</p>
+        <div class="metric-detail">
+          Raw Olympic files were cleaned, merged, and modeled into an
+          analytics-ready format using PySpark and ADF.
+        </div>
+      </div>
+      <div class="metric">
+        <h3><span class="count" data-target="3">0</span> min</h3>
+        <p>ETL Execution Time</p>
+        <div class="metric-detail">
+          Optimized transformation logic enabled end-to-end data refresh in
+          under 3 minutes using Databricks and Synapse.
+        </div>
+      </div>
+      <div class="metric">
+        <h3 class="count" data-target="12">0</h3>
+        <p>KPIs Derived</p>
+        <div class="metric-detail">
+          Generated insights like medal efficiency, gender ratios, and
+          historical trends—ready for dashboarding.
+        </div>
+      </div>
+    </section>
+    <div style="text-align: center; margin-top: -1rem; margin-bottom: 2rem;">
+      <p style="font-style: italic; font-size: 1rem; color: #7e7e7e;">
+        Hover over each metric to reveal a quick summary of its impact on the data pipeline.
       </p>
+    </div>
+    <section>
+      <div class="text-block">
+        <h2>Overview</h2>
+        <p>
+          This project demonstrates the design and implementation of a
+          full-scale data engineering pipeline using Microsoft Azure. Inspired
+          by the global scope of the 2024 Paris Olympics, I simulated a
+          real-world, production-grade workflow to extract raw data, apply
+          scalable transformations, and generate actionable insights using the
+          modern Azure stack.
+        </p>
+      </div>
     </section>
 
-    <main>
-      <section id="metrics" class="metrics">
-        <div class="metric">
-          <h3 class="count" data-target="5">0</h3>
-          <p>Datasets Processed</p>
-          <div class="metric-detail">
-            Raw Olympic files were cleaned, merged, and modeled into an
-            analytics-ready format using PySpark and ADF.
-          </div>
-        </div>
-        <div class="metric">
-          <h3><span class="count" data-target="3">0</span> min</h3>
-          <p>ETL Execution Time</p>
-          <div class="metric-detail">
-            Optimized transformation logic enabled end-to-end data refresh in
-            under 3 minutes using Databricks and Synapse.
-          </div>
-        </div>
-        <div class="metric">
-          <h3 class="count" data-target="12">0</h3>
-          <p>KPIs Derived</p>
-          <div class="metric-detail">
-            Generated insights like medal efficiency, gender ratios, and
-            historical trends—ready for dashboarding.
-          </div>
-        </div>
-      </section>
+    <section>
+      <div class="image-block">
+        <img src="assets/images/DE.png" alt="Azure Pipeline Diagram" />
+      </div>
+      <div class="text-block">
+        <h2>The Inspiration</h2>
+        <p>
+          When the Paris Olympics dominated global headlines, I challenged
+          myself: could I build a cloud-native data solution that mirrors how
+          businesses track, analyze, and report on real-time performance data?
+          This project became a self-directed bootcamp into Azure Data
+          Factory, Databricks, Synapse Analytics, and Data Lake Gen2.
+        </p>
+      </div>
+    </section>
 
-      <section>
-        <div class="text-block">
-          <h2>Overview</h2>
-          <p>
-            This project demonstrates the design and implementation of a
-            full-scale data engineering pipeline using Microsoft Azure. Inspired
-            by the global scope of the 2024 Paris Olympics, I simulated a
-            real-world, production-grade workflow to extract raw data, apply
-            scalable transformations, and generate actionable insights using the
-            modern Azure stack.
-          </p>
-        </div>
-      </section>
+    <section>
+      <div class="text-block">
+        <h2>Tech Stack & Tools</h2>
+        <ul>
+          <li>
+            <strong>Ingestion:</strong> Azure Data Factory – pipelines &
+            scheduling
+          </li>
+          <li>
+            <strong>Storage:</strong> Azure Data Lake Gen2 – secure containers
+          </li>
+          <li>
+            <strong>Processing:</strong> Azure Databricks (PySpark) – scalable
+            ETL
+          </li>
+          <li>
+            <strong>Analytics:</strong> Azure Synapse Analytics – external
+            tables & SQL
+          </li>
+          <li>
+            <strong>Data Source:</strong> Kaggle – Olympic stats & metadata
+          </li>
+        </ul>
+      </div>
+    </section>
 
-      <section>
-        <div class="image-block">
-          <img src="assets/images/DE.png" alt="Azure Pipeline Diagram" />
-        </div>
-        <div class="text-block">
-          <h2>The Inspiration</h2>
-          <p>
-            When the Paris Olympics dominated global headlines, I challenged
-            myself: could I build a cloud-native data solution that mirrors how
-            businesses track, analyze, and report on real-time performance data?
-            This project became a self-directed bootcamp into Azure Data
-            Factory, Databricks, Synapse Analytics, and Data Lake Gen2.
-          </p>
-        </div>
-      </section>
+    <section>
+      <div class="text-block">
+        <h2>Data Model</h2>
+        <ul>
+          <li>
+            <code>athletes.csv</code> – athlete details by NOC, gender, and
+            event
+          </li>
+          <li>
+            <code>coaches.csv</code> – nationality-linked coaching assignments
+          </li>
+          <li>
+            <code>entriesgender.csv</code> – gender distribution per sport
+          </li>
+          <li>
+            <code>medals.csv</code> – medal breakdowns by country & sport
+          </li>
+          <li><code>teams.csv</code> – NOC-based team affiliations</li>
+        </ul>
+      </div>
+      <div class="image-block">
+        <img src="assets/images/project1_DF.png" alt="ADF Screenshot" />
+      </div>
+    </section>
 
-      <section>
-        <div class="text-block">
-          <h2>Tech Stack & Tools</h2>
-          <ul>
-            <li>
-              <strong>Ingestion:</strong> Azure Data Factory – pipelines &
-              scheduling
-            </li>
-            <li>
-              <strong>Storage:</strong> Azure Data Lake Gen2 – secure containers
-            </li>
-            <li>
-              <strong>Processing:</strong> Azure Databricks (PySpark) – scalable
-              ETL
-            </li>
-            <li>
-              <strong>Analytics:</strong> Azure Synapse Analytics – external
-              tables & SQL
-            </li>
-            <li>
-              <strong>Data Source:</strong> Kaggle – Olympic stats & metadata
-            </li>
-          </ul>
-        </div>
-      </section>
+    <section>
+      <div class="text-block">
+        <h2>Implementation Breakdown</h2>
+        <ul>
+          <li>
+            <strong>ADF:</strong> Parameterized pipelines for ingesting &
+            versioning datasets
+          </li>
+          <li>
+            <strong>Databricks:</strong> PySpark logic for cleaning, feature
+            engineering, and optimization
+          </li>
+          <li>
+            <strong>Synapse:</strong> Modeled a star schema with external
+            tables for performant querying
+          </li>
+        </ul>
+      </div>
+    </section>
 
-      <section>
-        <div class="text-block">
-          <h2>Data Model</h2>
-          <ul>
-            <li>
-              <code>athletes.csv</code> – athlete details by NOC, gender, and
-              event
-            </li>
-            <li>
-              <code>coaches.csv</code> – nationality-linked coaching assignments
-            </li>
-            <li>
-              <code>entriesgender.csv</code> – gender distribution per sport
-            </li>
-            <li>
-              <code>medals.csv</code> – medal breakdowns by country & sport
-            </li>
-            <li><code>teams.csv</code> – NOC-based team affiliations</li>
-          </ul>
-        </div>
-        <div class="image-block">
-          <img src="assets/images/project1_DF.png" alt="ADF Screenshot" />
-        </div>
-      </section>
+    <section>
+      <div class="image-block">
+        <img src="assets/images/project1_SA.png" alt="Synapse Output Chart" />
+      </div>
+      <div class="text-block">
+        <h2>Business Insights</h2>
+        <p>
+          Enabled dynamic queries to explore medal efficiency, gender
+          distribution, and nation-wise performance trends. Output was clean,
+          structured, and ready to plug into Power BI or Tableau dashboards
+          for visual storytelling.
+        </p>
+      </div>
+    </section>
 
-      <section>
-        <div class="text-block">
-          <h2>Implementation Breakdown</h2>
-          <ul>
-            <li>
-              <strong>ADF:</strong> Parameterized pipelines for ingesting &
-              versioning datasets
-            </li>
-            <li>
-              <strong>Databricks:</strong> PySpark logic for cleaning, feature
-              engineering, and optimization
-            </li>
-            <li>
-              <strong>Synapse:</strong> Modeled a star schema with external
-              tables for performant querying
-            </li>
-          </ul>
-        </div>
-      </section>
+    <section>
+      <div class="text-block">
+        <h2>My Role</h2>
+        <p>
+          This was a solo build—every cloud resource, data pipeline, and SQL
+          query was designed and deployed by me. I handled edge cases,
+          incorporated monitoring logic, and ensured that the system could
+          evolve with new data drops—just like a real-world solution would
+          demand.
+        </p>
+      </div>
+    </section>
 
-      <section>
-        <div class="image-block">
-          <img src="assets/images/project1_SA.png" alt="Synapse Output Chart" />
-        </div>
-        <div class="text-block">
-          <h2>Business Insights</h2>
-          <p>
-            Enabled dynamic queries to explore medal efficiency, gender
-            distribution, and nation-wise performance trends. Output was clean,
-            structured, and ready to plug into Power BI or Tableau dashboards
-            for visual storytelling.
-          </p>
-        </div>
-      </section>
+    <section>
+      <div class="text-block">
+        <h2>Outcomes</h2>
+        <ul>
+          <li>
+            Cleaned and transformed 5+ datasets into a structured star schema
+          </li>
+          <li>Pipeline latency remained under 3 minutes end-to-end</li>
+          <li>
+            Validated KPIs ready for stakeholder dashboards and reporting
+          </li>
+        </ul>
+      </div>
+    </section>
 
-      <section>
-        <div class="text-block">
-          <h2>My Role</h2>
-          <p>
-            This was a solo build—every cloud resource, data pipeline, and SQL
-            query was designed and deployed by me. I handled edge cases,
-            incorporated monitoring logic, and ensured that the system could
-            evolve with new data drops—just like a real-world solution would
-            demand.
-          </p>
-        </div>
-      </section>
+    <section>
+      <div class="text-block">
+        <h2>What I Learned</h2>
+        <ul>
+          <li>Architected ETL pipelines using cloud-native best practices</li>
+          <li>Hands-on with Spark performance tuning and partitioning</li>
+          <li>
+            Integrated reliability into every layer—from ingestion to insights
+          </li>
+          <li>
+            Turned real data into decision-ready formats used by businesses
+          </li>
+        </ul>
+      </div>
+    </section>
 
-      <section>
-        <div class="text-block">
-          <h2>Outcomes</h2>
-          <ul>
-            <li>
-              Cleaned and transformed 5+ datasets into a structured star schema
-            </li>
-            <li>Pipeline latency remained under 3 minutes end-to-end</li>
-            <li>
-              Validated KPIs ready for stakeholder dashboards and reporting
-            </li>
-          </ul>
-        </div>
-      </section>
+    <section>
+      <div class="text-block">
+        <h2>Why This Project Matters</h2>
+        <p>
+          This wasn’t just a one-off exercise—it was a deliberate dive into
+          the heart of modern data engineering.
+        </p>
+        <ul>
+          <li>
+            ✔️ Build scalable, cloud-based data pipelines from the ground up
+          </li>
+          <li>✔️ Think like a data engineer, not just a coder</li>
+          <li>
+            ✔️ Deliver clean, structured, insight-ready data that
+            decision-makers can act on
+          </li>
+        </ul>
+        <p>
+          It’s one of several projects that reflect my hands-on skills,
+          curiosity, and drive to solve real-world problems with real-world
+          tools.<br />
+          <strong>Together, they form the foundation of my data-driven mindset—and
+            I’m just getting started.</strong>
+        </p>
+      </div>
+    </section>
+  </main>
 
-      <section>
-        <div class="text-block">
-          <h2>What I Learned</h2>
-          <ul>
-            <li>Architected ETL pipelines using cloud-native best practices</li>
-            <li>Hands-on with Spark performance tuning and partitioning</li>
-            <li>
-              Integrated reliability into every layer—from ingestion to insights
-            </li>
-            <li>
-              Turned real data into decision-ready formats used by businesses
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <section>
-        <div class="text-block">
-          <h2>Why This Project Matters</h2>
-          <p>
-            This wasn’t just a one-off exercise—it was a deliberate dive into
-            the heart of modern data engineering.
-          </p>
-          <ul>
-            <li>
-              ✔️ Build scalable, cloud-based data pipelines from the ground up
-            </li>
-            <li>✔️ Think like a data engineer, not just a coder</li>
-            <li>
-              ✔️ Deliver clean, structured, insight-ready data that
-              decision-makers can act on
-            </li>
-          </ul>
-          <p>
-            It’s one of several projects that reflect my hands-on skills,
-            curiosity, and drive to solve real-world problems with real-world
-            tools.<br />
-            <strong
-              >Together, they form the foundation of my data-driven mindset—and
-              I’m just getting started.</strong
-            >
-          </p>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <p>&copy; 2025 Arshpreet Kaur | Data Engineering Project</p>
-    </footer>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const counters = document.querySelectorAll(".count");
-
-        const animateCounters = (entries, observer) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              counters.forEach((counter) => {
-                const target = parseFloat(counter.getAttribute("data-target"));
-                let count = 0;
-                const isDecimal = target % 1 !== 0;
-                const increment = target / 60;
-
-                const update = () => {
-                  count += increment;
-                  if (count < target) {
-                    counter.innerText = isDecimal
-                      ? count.toFixed(1)
-                      : Math.floor(count);
-                    requestAnimationFrame(update);
-                  } else {
-                    counter.innerText = isDecimal ? target.toFixed(1) : target;
-                  }
-                };
-
-                update();
-              });
-
-              observer.unobserve(entry.target);
-            }
-          });
-        };
-
-        const counterObserver = new IntersectionObserver(animateCounters, {
-          threshold: 0.5,
-        });
-
-        const metricSection = document.querySelector(".metrics");
-        if (metricSection) {
-          counterObserver.observe(metricSection);
-        }
-      });
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("in-view");
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
-
-      document.querySelectorAll(".text-block, .image-block").forEach((el) => {
-        observer.observe(el);
-      });
-
+  <footer>
+    <p>&copy; 2025 Arshpreet Kaur | Data Engineering Project</p>
+  </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
       const counters = document.querySelectorAll(".count");
 
       const animateCounters = (entries, observer) => {
@@ -577,7 +549,7 @@
               update();
             });
 
-            observer.unobserve(entry.target); // only run once
+            observer.unobserve(entry.target);
           }
         });
       };
@@ -590,11 +562,68 @@
       if (metricSection) {
         counterObserver.observe(metricSection);
       }
-      document
-        .querySelectorAll(".text-block, .image-block, .metric")
-        .forEach((el) => {
-          observer.observe(el);
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+          }
         });
-    </script>
-  </body>
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll(".text-block, .image-block").forEach((el) => {
+      observer.observe(el);
+    });
+
+    const counters = document.querySelectorAll(".count");
+
+    const animateCounters = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          counters.forEach((counter) => {
+            const target = parseFloat(counter.getAttribute("data-target"));
+            let count = 0;
+            const isDecimal = target % 1 !== 0;
+            const increment = target / 60;
+
+            const update = () => {
+              count += increment;
+              if (count < target) {
+                counter.innerText = isDecimal
+                  ? count.toFixed(1)
+                  : Math.floor(count);
+                requestAnimationFrame(update);
+              } else {
+                counter.innerText = isDecimal ? target.toFixed(1) : target;
+              }
+            };
+
+            update();
+          });
+
+          observer.unobserve(entry.target); // only run once
+        }
+      });
+    };
+
+    const counterObserver = new IntersectionObserver(animateCounters, {
+      threshold: 0.5,
+    });
+
+    const metricSection = document.querySelector(".metrics");
+    if (metricSection) {
+      counterObserver.observe(metricSection);
+    }
+    document
+      .querySelectorAll(".text-block, .image-block, .metric")
+      .forEach((el) => {
+        observer.observe(el);
+      });
+  </script>
+</body>
+
 </html>
