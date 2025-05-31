@@ -3,91 +3,226 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vertical Scroll Ring</title>
+  <title>Project Scroll Wheel</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #0d1117;
-      color: white;
-      font-family: 'Segoe UI', sans-serif;
-      overflow-y: scroll;
-      height: 100vh;
+    * {
+      box-sizing: border-box;
     }
 
-    .container {
+    body {
+      margin: 0;
+      background: #f8f8f8;
+      color: #1e1e1e;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+    }
+
+    .main {
+      display: flex;
+      height: 100vh;
+      width: 100%;
+      max-width: 1200px;
+      min-width: 960px;
+    }
+
+    .left-panel {
+      flex: 0.4;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .project-list {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 50vh;
-      padding-bottom: 50vh;
+      gap: 4rem;
+      height: 80vh;
+      overflow: hidden;
+      position: relative;
+      justify-content: center;
     }
 
     .project {
-    font-size: 1.5rem;
-    margin: 2rem 0;
-    padding: 1rem; /* Added padding */
-    transition: all 0.3s ease;
-    opacity: 0.3;
-    transform: scale(0.9);
-  }
+      font-size: 1.2rem;
+      opacity: 0.3;
+      transform: scale(0.8);
+      transition: all 0.3s ease;
+      filter: blur(1.5px);
+      text-align: center;
+      max-width: 90%;
+      word-wrap: break-word;
+    }
 
-  .project.focused {
-    font-size: 2.2rem;
-    font-weight: bold;
-    opacity: 1;
-    transform: scale(1.2);
-    color: #f7a500;
-  }
+    .project.mid {
+      opacity: 0.6;
+      transform: scale(1);
+      filter: blur(0.5px);
+    }
+
+    .project.focused {
+      font-size: 2rem;
+      font-weight: bold;
+      opacity: 1;
+      transform: scale(1.2);
+      color: #f7a500;
+      filter: none;
+    }
+
+    .right-panel {
+      flex: 0.6;
+      background-color: #f8f8f8;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .poster {
+      max-width: 80%;
+      height: auto;
+      margin-bottom: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      transition: opacity 0.4s ease;
+    }
+
+    .description {
+      font-size: 1rem;
+      color: #333;
+      max-width: 90%;
+      line-height: 1.6;
+    }
+
+    .view-link {
+      margin-top: 1.5rem;
+      background: #f7a500;
+      color: #0d1117;
+      text-decoration: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .view-link:hover {
+      background: #ffb400;
+    }
   </style>
 </head>
 <body>
-
-  <div class="container" id="projectList">
-    <div class="project">Paris Olympics 2024 Data Engineering</div>
-    <div class="project">Payment System Application</div>
-    <div class="project">British Airways Data Analysis</div>
-    <div class="project">Runway Inspection & GeoAnalysis</div>
-    <div class="project">Forged Signature Detection System</div>
-    <div class="project">Pointer Pursuit</div>
-    <div class="project">SereneSignal Reminder App</div>
-    <div class="project">Dynamic Wallpaper Project</div>
+  <div class="main">
+    <div class="left-panel">
+      <div class="project-list" id="projectList"></div>
+    </div>
+    <div class="right-panel">
+      <img id="posterImage" class="poster" src="src/assets/images/DE.png" alt="Project Poster" />
+      <div class="description" id="projectDescription">
+        End-to-end data pipeline using Azure tools to process Olympic datasets for real-time medal performance insights.
+      </div>
+      <a id="projectLink" class="view-link" href="#" target="_blank">View Project</a>
+    </div>
   </div>
-  
 
   <script>
-    const projects = document.querySelectorAll(".project");
-    const projectImages = [
-      "src/assets/images/DE.png", // Paris Olympics 2024 Data Engineering
-      "src/assets/images/project2.png", // Payment System Application
-      "src/assets/images/project3.png", // British Airways Data Analysis
-      "src/assets/images/project4.png", // Runway Inspection & GeoAnalysis
-      "src/assets/images/project5.png", // Forged Signature Detection System
-      "src/assets/images/project6.png", // Pointer Pursuit
-      "src/assets/images/project7.png", // SereneSignal Reminder App
-      "src/assets/images/project8.png"  // Dynamic Wallpaper Project
+    const projectTitles = [
+      "Paris Olympics 2024 Data Engineering",
+      "Payment System Application",
+      "British Airways Data Analysis",
+      "Runway Inspection & GeoAnalysis",
+      "Forged Signature Detection System",
+      "Pointer Pursuit",
+      "SereneSignal Reminder App",
+      "Dynamic Wallpaper Project"
     ];
-  
-    function updateFocus() {
-      let center = window.innerHeight / 2;
-      projects.forEach((project, index) => {
-        const rect = project.getBoundingClientRect();
-        const distance = Math.abs(center - (rect.top + rect.height / 2));
-        if (distance < 50) {
-          project.classList.add("focused");
-          document.body.style.backgroundImage = `linear-gradient(rgba(13, 17, 23, 0.5), rgba(13, 17, 23, 0.5)), url(${projectImages[index]})`;
-          document.body.style.backgroundSize = "cover";
-          document.body.style.backgroundPosition = "center";
-          document.body.style.backgroundRepeat = "no-repeat";
-          document.body.style.backgroundAttachment = "fixed"; /* Ensures the background is fixed */
-        } else {
-          project.classList.remove("focused");
-        }
-      });
+
+    const projectImages = [
+      "src/assets/images/DE.png",
+      "src/assets/images/project2.png",
+      "src/assets/images/project3.png",
+      "src/assets/images/project4.png",
+      "src/assets/images/project5.png",
+      "src/assets/images/project6.png",
+      "src/assets/images/project7.png",
+      "src/assets/images/project8.png"
+    ];
+
+    const projectDescriptions = [
+      "End-to-end data pipeline using Azure tools to process Olympic datasets for real-time medal performance insights.",
+      "A secure Python-based payment application with real-time Stripe integration and receipt tracking.",
+      "Analyzed 16K+ reviews using Tableau to uncover sentiment and performance trends across British Airways global routes.",
+      "A drone-based laser and GPS system to detect runway hazards and geolocate them with 30cm accuracy.",
+      "Built a neural network system to identify forged signatures from scanned documents.",
+      "Browser-based pointer-following game built with JS animations and real-time feedback loops.",
+      "A soft-focus timer app for visual reminders and Pomodoro-style productivity tracking using Python Tkinter.",
+      "A dynamic wallpaper generator that adjusts visuals based on your device use and local weather data."
+    ];
+
+    const projectLinks = [
+      "projects/de.html",
+      "projects/payment.html",
+      "projects/airways.html",
+      "projects/runway.html",
+      "projects/signature.html",
+      "projects/pointer.html",
+      "projects/serene.html",
+      "projects/wallpaper.html"
+    ];
+
+    let currentIndex = 0;
+
+    const posterImage = document.getElementById("posterImage");
+    const descriptionText = document.getElementById("projectDescription");
+    const viewLink = document.getElementById("projectLink");
+    const list = document.getElementById("projectList");
+
+    function clampIndex(index) {
+      return Math.max(0, Math.min(projectTitles.length - 1, index));
     }
-  
-    window.addEventListener("scroll", updateFocus);
-    window.addEventListener("load", updateFocus);
+
+    function renderProjects() {
+      list.innerHTML = "";
+
+      for (let i = -2; i <= 2; i++) {
+        const index = currentIndex + i;
+        if (index < 0 || index >= projectTitles.length) continue;
+        const div = document.createElement("div");
+        div.className = "project";
+        if (i === 0) div.classList.add("focused");
+        else if (Math.abs(i) === 1) div.classList.add("mid");
+        div.textContent = projectTitles[index];
+        list.appendChild(div);
+      }
+
+      posterImage.src = projectImages[currentIndex];
+      descriptionText.textContent = projectDescriptions[currentIndex];
+      viewLink.href = projectLinks[currentIndex];
+    }
+
+    function shiftWheel(direction) {
+      const newIndex = clampIndex(currentIndex + direction);
+      if (newIndex !== currentIndex) {
+        currentIndex = newIndex;
+        renderProjects();
+      }
+    }
+
+    window.addEventListener("wheel", (e) => {
+      if (e.deltaY > 20) shiftWheel(1);
+      else if (e.deltaY < -20) shiftWheel(-1);
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown") shiftWheel(1);
+      else if (e.key === "ArrowUp") shiftWheel(-1);
+    });
+
+    renderProjects();
   </script>
 </body>
 </html>
