@@ -27,12 +27,29 @@
         <div class="logo-container">
           <img src="src/assets/images/logo_no_bg.png" alt="Arshpreet Kaur Logo" class="logo" />
         </div>
-        <nav>
-          <ul class="nav-links">
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#about">About</a></li>
-          </ul>
-        </nav>
+  
+<!-- Hamburger Icon (Mobile Only) -->
+<div class="mobile-menu-toggle" onclick="toggleMenu()">☰</div>
+
+<!-- Desktop Nav -->
+<nav class="desktop-nav">
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="src/assets/Arshpreet_Kaur_Resume.pdf" target="_blank">Resume</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</nav>
+
+<!-- Mobile Nav -->
+<nav id="mobile-nav" class="mobile-nav">
+  <ul class="nav-links">
+    <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+    <li><a href="src/assets/Arshpreet_Kaur_Resume.pdf" target="_blank" onclick="toggleMenu()">Resume</a></li>
+    <li><a href="#about" onclick="toggleMenu()">About</a></li>
+  </ul>
+</nav>
+
+
       </header>
 
       <h1>Hi, I’m Arshpreet Kaur.</h1>
@@ -168,6 +185,13 @@
     </div>
   </footer>
   <script src="scripts/main.js"></script>
+  <script>
+  function toggleMenu() {
+    const nav = document.getElementById("mobile-nav");
+    nav.classList.toggle("open");
+  }
+</script>
+
 </body>
 
 </html>

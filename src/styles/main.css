@@ -66,7 +66,7 @@ body {
 
 .hero-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   width: 100%;
 }
 
@@ -500,4 +500,102 @@ footer p {
   color: #666666;
 }
 
+/* Hide mobile elements by default (desktop view) */
+.mobile-nav,
+.mobile-menu-toggle {
+  display: none;
+}
 
+
+
+@media (max-width: 768px) {
+  /* Layout & Typography */
+  .grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .about-container {
+    flex-direction: column-reverse;
+    padding: 20px;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .about-text {
+    min-width: 100%;
+  }
+
+  .project-card {
+    padding: 16px;
+    font-size: 1rem;
+  }
+
+  .project-card img {
+    max-height: 200px;
+    object-fit: cover;
+  }
+
+  header {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .hero-container h1 {
+    font-size: 2rem;
+  }
+
+  .hero-container p {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+
+  /* Desktop nav hidden, mobile shown */
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  /* Sidebar nav */
+  .mobile-nav {
+    position: fixed;
+    display: block;
+    top: 0;
+    right: -100%;
+    width: 250px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+    padding: 60px 20px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+  }
+
+  .mobile-nav.open {
+    right: 0;
+  }
+
+  .mobile-nav .nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    font-size: 1.2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-links li {
+    display: block;
+    text-align: left;
+  }
+}
